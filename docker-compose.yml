@@ -39,17 +39,17 @@ services:
       - formbar
 
   postgres:
-    image: postgres:alpine
+    image: bitnami/postgresql:latest
     container_name: rc-postgres
     restart: unless-stopped
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: formbar
+      POSTGRESQL_USERNAME: postgres
+      POSTGRESQL_PASSWORD: password
+      POSTGRESQL_DATABASE: formbar
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
-      - rc_postgres_data:/var/lib/postgresql/data
+      - rc_postgres_data:/bitnami/postgresql
     networks:
       - formbar
 
@@ -65,16 +65,16 @@ services:
       - formbar
 
   mongodb:
-    image: mongo:latest
+    image: bitnami/mongodb:latest
     container_name: rc-mongodb
     restart: unless-stopped
     environment:
-      MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGODB_ROOT_USER: admin
+      MONGODB_ROOT_PASSWORD: password
     ports:
       - "27017:27017"
     volumes:
-      - mongodb_data:/data/db
+      - mongodb_data:/bitnami/mongodb
     networks:
       - formbar
 
